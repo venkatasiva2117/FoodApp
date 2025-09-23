@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Menu Dashboard</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+/* Left Sidebar */
+.sidebar {
+    width: 200px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.sidebar h3 {
+    margin-top: 0;
+}
+
+.sidebar label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.sidebar input[type="number"], .sidebar select {
+    width: 100%;
+    padding: 6px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Center Menu Items */
+.menu-section {
+    flex-grow: 1;
+}
+
+.menu-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+}
+
+.menu-item {
+    background-color: white;
+    width: 220px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.menu-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.menu-item h3 {
+    margin: 10px 0 5px 0;
+}
+
+.menu-item p {
+    font-size: 14px;
+    color: #555;
+    min-height: 40px;
+}
+
+.menu-item .price {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.menu-item button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.menu-item button:hover {
+    background-color: #0069d9;
+}
+
+/* Right Sidebar - Cart */
+.cart-sidebar {
+    width: 300px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.cart-sidebar h3 {
+    margin-top: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.cart-item span {
+    display: block;
+}
+
+#checkout-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#checkout-btn:hover {
+    background-color: #218838;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <h3>Categories</h3>
+        <select id="category-filter">
+            <option value="all">All</option>
+            <option value="veg">Veg</option>
+            <option value="non-veg">Non-Veg</option>
+        </select>
+
+        <h3>Filter by Price</h3>
+        <label for="min-price">Min Price:</label>
+        <input type="number" id="min-price" placeholder="0" min="0">
+        
+        <label for="max-price">Max Price:</label>
+        <input type="number" id="max-price" placeholder="1000" min="0">
+
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
+
+    <!-- Center Menu -->
+    <div class="menu-section">
+        <h1>Menu</h1>
+        <div id="menu-items" class="menu-items"></div>
+    </div>
+
+    <!-- Right Sidebar - Cart -->
+    <div class="cart-sidebar">
+        <h3>Your Cart</h3>
+        <div id="cart-items"></div>
+        <h4>Total: ₹<span id="cart-total">0</span></h4>
+        <button id="checkout-btn" onclick="checkout()">Checkout</button>
+    </div>
+</div>
+
+<script>
+// Menu Data with categories
+const menu = [
+    { id: 1, name: "Pizza Margherita", description: "Classic pizza with cheese and tomato sauce.", price: 250, image: "https://media.istockphoto.com/id/1442417585/photo/person-getting-a-piece-of-cheesy-pepperoni-pizza.jpg?s=612x612&w=0&k=20&c=k60TjxKIOIxJpd4F4yLMVjsniB4W1BpEV4Mi_nb4uJU=", category: "veg" },
+    { id: 2, name: "Veg Burger", description: "Delicious vegetarian burger with fresh ingredients.", price: 120, image: "https://www.shutterstock.com/image-photo/closeup-delicious-veg-burger-isolated-600nw-2502259523.jpg", category: "veg" },
+    { id: 3, name: "Pasta Alfredo", description: "Creamy pasta with herbs and cheese.", price: 180, image: "https://img.freepik.com/free-photo/plate-fettuccine-alfredo-with-fresh-parsley_9975-124881.jpg", category: "veg" },
+    { id: 4, name: "Grilled Sandwich", description: "Toasty sandwich with fresh vegetables and cheese.", price: 90, image: "https://img.freepik.com/free-photo/side-view-club-sandwich-with-salted-cucumbers-lemon-olives-round-white-plate_176474-3049.jpg", category: "veg" },
+    { id: 5, name: "Chicken-65", description: "Spicy fried chicken pieces.", price: 220, image: "https://www.shutterstock.com/image-photo/spicy-chicken-fry-kerala-65-600nw-1587847900.jpg", category: "non-veg" },
+    { id: 6, name: "Chicken Lollipop", description: "Chicken legs fried to perfection.", price: 199, image: "https://www.shutterstock.com/image-photo/spicy-chicken-fry-kerala-65-600nw-1587847900.jpg", category: "non-veg" }
+];
+
+// Load menu items
+function displayMenu(filteredMenu = menu) {
+    const container = document.getElementById("menu-items");
+    container.innerHTML = "";
+    filteredMenu.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "menu-item";
+        div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <h3>${item.name}</h3>
+            <p>${item.description}</p>
+            <div class="price">₹${item.price}</div>
+            <button onclick="addToCart(${item.id})">Add to Cart</button>
+        `;
+        container.appendChild(div);
+    });
+}
+
+// Cart logic
+function loadCart() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartItems = document.getElementById("cart-items");
+    const totalElem = document.getElementById("cart-total");
+    cartItems.innerHTML = "";
+    let total = 0;
+
+    cart.forEach(item => {
+        total += item.price * item.quantity;
+        const div = document.createElement("div");
+        div.className = "cart-item";
+        div.innerHTML = `
+            <span>${item.name} (x${item.quantity})</span>
+            <span>₹${item.price * item.quantity}</span>
+        `;
+        cartItems.appendChild(div);
+    });
+
+    totalElem.textContent = total;
+}
+
+function addToCart(id) {
+    const item = menu.find(i => i.id === id);
+    if (!item) return;
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const index = cart.findIndex(i => i.id === id);
+    if (index > -1) {
+        cart[index].quantity += 1;
+    } else {
+        cart.push({...item, quantity: 1});
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+    alert(`${item.name} added to cart!`);
+}
+
+function checkout() {
+    alert("Proceeding to checkout!");
+    // Implement checkout logic here
+}
+
+// Filters
+function applyFilters() {
+    const category = document.getElementById("category-filter").value;
+    const minPrice = parseInt(document.getElementById("min-price").value) || 0;
+    const maxPrice = parseInt(document.getElementById("max-price").value) || Infinity;
+
+    const filtered = menu.filter(item => {
+        const categoryMatch = category === "all" || item.category === category;
+        const priceMatch = item.price >= minPrice && item.price <= maxPrice;
+        return categoryMatch && priceMatch;
+    });
+
+    displayMenu(filtered);
+}
+
+// Initial load
+window.onload = () => {
+    displayMenu();
+    loadCart();
+};
+</script>
+
+</body>
+</html>
