@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+	font-family: monospace;
+	background-color: #f8f8f8;
+	color: #333;
+}
+header{
+margin-top :10px;
+background-color: #ff6b6b;
+text-align: center;
+color: #fff;
+padding: 20px;
+}
+.container{
+max-width: 1200px;
+margin: 20px auto;
+padding: 0 20px;
+}
+.menu-items{
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+gap : 30px;
+}
+
+.menu-item{
+background-color: #fff;
+border-radius: 10px;
+overflow: hidden;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+transition : transform 0.9s ease;
+}
+
+.menu-item:hover{
+transform: scale(1.05);
+}
+
+.item-img{
+width: 100%;
+height: 180px;
+object-fit:cover;
+}
+.item-details{
+padding: 20px;
+}
+.item-name{
+font-size: 1.2rem;
+margin-bottom: 8px;
+}
+
+
+.item-price{
+font-weight: bold;
+margin-bottom : 8px;
+color: #ff6b6b;
+}
+
+.item-quatity{
+font-weight: bold;
+}
+
+.item-quatity input{
+width: 50px;
+padding: 5px;
+border-radius: 5px;
+border : 1px solid #ccc;
+}
+
+
+footer{
+text-align: center;
+background-color: #222;
+color: #fff;
+padding: 5px;
+margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
+
+	<header> Your Cart </header>
+	<main class="container">
+		<session class="menu-items"> <!--item1 -->
+		<div class="menu-item">
+			<img alt="Image"
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXuJq5UB6iQvPawZmR2te-Obw6VSHsktC5MQ&s"
+				class="item-img">
+			<div class="item-details">
+				<h3 class="item-name">Paneer Butter Masala</h3>
+				<p class="item-price">₹ 220</p>
+				<div class="item-quatity">
+					Quantity:<input type="number" value="1" min="1" max="5">
+
+				</div>
+			</div>
+		</div>
+
+		<div class="menu-item">
+			<img alt="Image"
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXuJq5UB6iQvPawZmR2te-Obw6VSHsktC5MQ&s"
+				class="item-img">
+			<div class="item-details">
+				<h3 class="item-name">Masala Vada</h3>
+				<p class="item-price">₹ 30</p>
+				<div class="item-quatity">
+					Quantity:<input type="number" value="1" min="1" max="5">
+				</div>
+			</div>
+		</div>
+		<div class="menu-item">
+			<img alt="Image"
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXuJq5UB6iQvPawZmR2te-Obw6VSHsktC5MQ&s"
+				class="item-img">
+			<div class="item-details">
+				<h3 class="item-name">Masala Vada</h3>
+				<p class="item-price">₹ 30</p>
+				<div class="item-quatity">
+					Quantity:<input type="number" value="1" min="1" max="5">
+				</div>
+			</div>
+		</div>
+		<div class="menu-item">
+			<img alt="Image"
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXuJq5UB6iQvPawZmR2te-Obw6VSHsktC5MQ&s"
+				class="item-img">
+			<div class="item-details">
+				<h3 class="item-name">Masala Vada</h3>
+				<p class="item-price">₹ 30</p>
+				<div class="item-quatity">
+					Quantity:<input type="number" value="1" min="1" max="5">
+				</div>
+			</div>
+		</div>
+		<div class="menu-item">
+			<img alt="Image"
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXuJq5UB6iQvPawZmR2te-Obw6VSHsktC5MQ&s"
+				class="item-img">
+			<div class="item-details">
+				<h3 class="item-name">Masala Vada</h3>
+				<p class="item-price">₹ 30</p>
+				<div class="item-quatity">
+					Quantity:<input type="number" value="1" min="1" max="5">
+				</div>
+			</div>
+		</div>
+		<div class="menu-item">
+			<img alt="Image"
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXuJq5UB6iQvPawZmR2te-Obw6VSHsktC5MQ&s"
+				class="item-img">
+			<div class="item-details">
+				<h3 class="item-name">Masala Vada</h3>
+				<p class="item-price">₹ 30</p>
+				<div class="item-quatity">
+					Quantity:<input type="number" value="1" min="1" max="5">
+				</div>
+			</div>
+		</div>
+		<div class="menu-item">
+			<img alt="Image"
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXuJq5UB6iQvPawZmR2te-Obw6VSHsktC5MQ&s"
+				class="item-img">
+			<div class="item-details">
+				<h3 class="item-name">Masala Vada</h3>
+				<p class="item-price">₹ 30</p>
+				<div class="item-quatity">
+					Quantity:<input type="number" value="1" min="1" max="5">
+				</div>
+			</div>
+		</div>
+		<div class="menu-item">
+			<img alt="Image"
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXuJq5UB6iQvPawZmR2te-Obw6VSHsktC5MQ&s"
+				class="item-img">
+			<div class="item-details">
+				<h3 class="item-name">Masala Vada</h3>
+				<p class="item-price">₹ 30</p>
+				<div class="item-quatity">
+					Quantity:<input type="number" value="1" min="1" max="5">
+				</div>
+			</div>
+		</div>
+		<div class="menu-item">
+			<img alt="Image"
+				src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXuJq5UB6iQvPawZmR2te-Obw6VSHsktC5MQ&s"
+				class="item-img">
+			<div class="item-details">
+				<h3 class="item-name">Masala Vada</h3>
+				<p class="item-price">₹ 30</p>
+				<div class="item-quatity">
+					Quantity:<input type="number" value="1" min="1" max="5">
+				</div>
+			</div>
+		</div>
+
+		</session>
+	</main>
+	
+	 <footer>
+    <p>&copy; 2025 My Restaurant</p>
+  </footer>
+</body>
+</html>
