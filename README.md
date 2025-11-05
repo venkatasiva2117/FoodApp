@@ -1,7 +1,7 @@
 Foodie - Food Ordering App
 ==========================
 
-Frontend: HTML/CSS/JS (no frameworks). Backend: Java (J2EE Servlets), JDBC, MySQL.
+Frontend: HTML/CSS/JS. Backend: Java (J2EE Servlets), JDBC, MySQL.
 
 Run Frontend
 ------------
